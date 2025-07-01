@@ -4,17 +4,35 @@ import Box from "@mui/material/Box";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import List from "@mui/material/List";
 import UpdateProfile from "./UpdateProfile.";
+import { useChangePasswordMutation } from "../../features/auth/authAPI";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function SidebarRight({ open, onClose, onOpen }) {
   const [oldPassword, setOldPassword] = React.useState("");
   const [newPassword, setNewPassword] = React.useState("");
 
-  const handlePasswordChange = (e) => {
+  const [changePassword, { isLoading }] = useChangePasswordMutation();
+
+  const handlePasswordChange = async (e) => {
     e.preventDefault();
 
-    alert("Mot de passe modifié (simulation)");
-    setOldPassword("");
-    setNewPassword("");
+    try {
+      await changePassword({
+        old_password: oldPassword,
+        new_password: newPassword,
+      }).unwrap();
+
+      alert("Mot de passe modifié avec succès !");
+      setOldPassword("");
+      setNewPassword("");
+    } catch (err) {
+      console.error(err);
+      if (err?.data?.detail) {
+        alert(err.data.detail);
+      } else {
+        alert("Erreur lors de la modification du mot de passe.");
+      }
+    }
   };
 
   const handleDeleteAccount = () => {
@@ -36,7 +54,12 @@ export default function SidebarRight({ open, onClose, onOpen }) {
 
   const list = () => (
     <Box
-      sx={{ width: 500 }}
+      sx={{
+        width: {
+          xs: 400, // pour les petits écrans (téléphones)
+          sm: 500, // écrans ≥ 600px
+        },
+      }}
       role="presentation"
       onClick={handleClickBackground}
       onKeyDown={(e) => {
@@ -81,9 +104,18 @@ export default function SidebarRight({ open, onClose, onOpen }) {
 
             <button
               type="submit"
-              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+              disabled={isLoading}
+              className={`w-full flex items-center justify-center bg-green-600 text-white py-2 rounded transition ${
+                isLoading
+                  ? "opacity-60 cursor-not-allowed"
+                  : "hover:bg-green-700"
+              }`}
             >
-              Modifier mot de passe
+              {isLoading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                <span>Modifier mot de passe</span>
+              )}
             </button>
           </form>
 

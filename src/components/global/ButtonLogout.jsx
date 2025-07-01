@@ -22,7 +22,7 @@ const ButtonLogout = () => {
   };
 
   return (
-    <button onClick={handleLogout} className="mt-0.5">
+    <button onClick={handleLogout} className="ms-0.5 max-sm:mt-2">
       <DoorOpenIcon />
     </button>
   );

@@ -61,7 +61,7 @@ const UpdateProfile = ({ onclose }) => {
     <form onSubmit={handleSaveData} className="mb-6">
       <h2 className="text-xl font-semibold mb-4">Mes informations</h2>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
         <div>
           <label className="block font-semibold mb-1">
             Prénom(s) et Nom(s) :

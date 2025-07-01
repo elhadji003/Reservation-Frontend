@@ -57,26 +57,26 @@ const Navbar = () => {
           }`}
         >
           <ul className="flex flex-col space-y-2 px-6 py-2 text-gray-700 font-medium">
-            <li>
-              <Link to="/" onClick={() => setIsOpen(false)}>
-                Accueil
-              </Link>
+            <li className="hover:scale-110 transition-all duration-200 ease-in-out">
+              <Link to="/dashboardClient">Accueil</Link>
             </li>
-            <li>
-              <Link to="/slots" onClick={() => setIsOpen(false)}>
-                Créneaux
-              </Link>
+            <li className="hover:scale-110 transition-all duration-200 ease-in-out">
+              <Link to="/slotsList">Créneaux</Link>
             </li>
-            <li>
-              <Link to="/bookings" onClick={() => setIsOpen(false)}>
-                Réservations
-              </Link>
+            <li className="hover:scale-110 transition-all duration-200 ease-in-out">
+              <Link to="/reservation">Réservations</Link>
             </li>
-            <li>
-              <Link to="/admin" onClick={() => setIsOpen(false)}>
-                Admin
-              </Link>
-            </li>
+            <div className="flex items-center gap-3">
+              <li
+                className="hover:scale-110 transition-all duration-200 ease-in-out cursor-pointer"
+                onClick={() => setDrawerOpen(true)} // 👈 ouvrir sidebar
+              >
+                <User />
+              </li>
+              <li className="hover:scale-110 transition-all duration-200 ease-in-out cursor-pointer">
+                <ButtonLogout />
+              </li>
+            </div>
           </ul>
         </div>
       </nav>
