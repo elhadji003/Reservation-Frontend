@@ -53,12 +53,12 @@ const MyReservations = () => {
 
   return (
     <>
-      <div className="bg-white p-6 rounded shadow max-w-4xl mx-auto">
+      <div className="bg-white p-6 rounded shadow">
         <h2 className="text-2xl font-semibold text-amber-700 mb-6">
           Mes Réservations
         </h2>
 
-        <ul className="space-y-5">
+        <ul className="grid grid-cols-2 items-center gap-8">
           {reservations.map((res) => (
             <li
               key={res.id}

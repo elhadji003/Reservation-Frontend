@@ -2,17 +2,8 @@ import React from "react";
 import { useGetMeQuery } from "../features/auth/authAPI";
 import MyReservations from "./MyReservations";
 
-const apiUrl = import.meta.env.VITE_API_URL;
-
 const DashboardClient = () => {
   const { data: user } = useGetMeQuery();
-
-  const avatarUrl =
-    user?.avatar && user.avatar.startsWith("http")
-      ? user.avatar
-      : user?.avatar
-      ? `${apiUrl}${user.avatar}`
-      : null;
 
   return (
     <div className="p-4 md:p-8 bg-gray-100 min-h-100">
@@ -31,7 +22,7 @@ const DashboardClient = () => {
           <div className="w-14 h-14 rounded-full overflow-hidden shadow-md border-2 border-amber-500 bg-white">
             {user?.avatar ? (
               <img
-                src={avatarUrl}
+                src={user?.avatar}
                 alt="Avatar"
                 className="w-full h-full object-cover"
               />

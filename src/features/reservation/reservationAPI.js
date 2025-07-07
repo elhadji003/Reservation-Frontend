@@ -11,6 +11,26 @@ export const reservationApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["Reservation", "Slot", "Resource"],
   endpoints: (builder) => ({
+    // 🔹 Create slot
+    createSlot: builder.mutation({
+      query: (formData) => ({
+        url: SLOTS_API,
+        method: "POST",
+        body: formData,
+      }),
+    }),
+
+    getFacilities: builder.query({
+      query: () => "/facilities/",
+    }),
+
+    deleteSlot: builder.mutation({
+      query: (id) => ({
+        url: `${SLOTS_API}${id}/`,
+        method: "DELETE",
+      }),
+    }),
+
     // 🔹 Get all slots
     getSlots: builder.query({
       query: () => SLOTS_API,
@@ -38,6 +58,9 @@ export const reservationApi = createApi({
       }),
       invalidatesTags: ["Reservation"],
     }),
+    getAllReservations: builder.query({
+      query: () => `/reservations-all/`,
+    }),
     getReservationById: builder.query({
       query: (id) => `/reservations/${id}/`,
     }),
@@ -64,9 +87,13 @@ export const reservationApi = createApi({
 
 export const {
   useGetSlotsQuery,
+  useGetFacilitiesQuery,
   useGetSlotByIdQuery,
+  useDeleteSlotMutation,
   useGetResourcesQuery,
+  useCreateSlotMutation,
   useCreateReservationMutation,
+  useGetAllReservationsQuery,
   useGetReservationByIdQuery,
   useGetMyReservationsQuery,
   useCancelReservationMutation,
