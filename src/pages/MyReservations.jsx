@@ -58,7 +58,7 @@ const MyReservations = () => {
           Mes Réservations
         </h2>
 
-        <ul className="grid grid-cols-2 items-center gap-8">
+        <ul className="grid grid-cols-2 items-center gap-8 max-sm:grid-cols-1">
           {reservations.map((res) => (
             <li
               key={res.id}

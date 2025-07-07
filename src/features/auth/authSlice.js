@@ -1,12 +1,22 @@
-// features/auth/authSlice.js
+// authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
-const persistedState = JSON.parse(localStorage.getItem("auth")) || {
-  user: null,
-  accessToken: null,
-  refreshToken: null,
-  role: null,
-};
+let persistedState;
+try {
+  persistedState = JSON.parse(localStorage.getItem("auth")) || {
+    user: null,
+    accessToken: null,
+    refreshToken: null,
+    role: null,
+  };
+} catch {
+  persistedState = {
+    user: null,
+    accessToken: null,
+    refreshToken: null,
+    role: null,
+  };
+}
 
 const authSlice = createSlice({
   name: "auth",

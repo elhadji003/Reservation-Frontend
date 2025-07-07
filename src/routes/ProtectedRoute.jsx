@@ -5,8 +5,8 @@ const ProtectedRoute = ({ allowedRoles, children }) => {
   const accessToken = useSelector((state) => state.auth?.accessToken);
   const role = useSelector((state) => state.auth?.role);
 
-  // console.log("Role actuel :", role);
-  // console.log("Rôles autorisés :", allowedRoles);
+  console.log("Role actuel :", role);
+  console.log("Rôles autorisés :", allowedRoles);
   //
   if (!accessToken) return <Navigate to="/login" />;
 

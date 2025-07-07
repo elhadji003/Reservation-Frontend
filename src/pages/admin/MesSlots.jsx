@@ -62,7 +62,7 @@ const MesSlots = () => {
           to={"/create-slot"}
           className="flex items-center gap-4 px-4 py-2 rounded-md bg-amber-700 text-white uppercase"
         >
-          <psan className="max-sm:hidden"> Creer un slot</psan> <FaPlus />
+          <span className="max-sm:hidden"> Creer un slot</span> <FaPlus />
         </Link>
       </div>
 
