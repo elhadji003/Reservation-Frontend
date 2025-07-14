@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayoutAdmin from "./layout/LayoutAdmin";
+import { Toaster } from "react-hot-toast";
 import Layout from "./layout/Layout";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { publicRoutes } from "./routes/publicRoutes";
@@ -42,6 +43,7 @@ const App = () => {
           ))}
         </Route>
       </Routes>
+      <Toaster position="top-right" />
     </Router>
   );
 };

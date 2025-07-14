@@ -14,6 +14,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const notAvailable = () => {
+    toast.error("Cette fonctionnalité n'est pas encore disponible");
+  };
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
@@ -133,13 +137,22 @@ const Login = () => {
               <span className="w-20 h-px bg-gray-300" />
             </div>
             <div className="flex justify-center space-x-4">
-              <button className="flex items-center justify-center gap-2 border px-4 py-2 rounded-lg">
+              <button
+                onClick={notAvailable}
+                className="flex items-center justify-center gap-2 border px-4 py-2 rounded-lg"
+              >
                 <FaGoogle size={25} />
               </button>
-              <button className="flex items-center justify-center gap-2 border px-4 py-2 rounded-lg">
+              <button
+                onClick={notAvailable}
+                className="flex items-center justify-center gap-2 border px-4 py-2 rounded-lg"
+              >
                 <FaApple size={25} />
               </button>
-              <button className="flex items-center justify-center gap-2 border px-4 py-2 rounded-lg">
+              <button
+                onClick={notAvailable}
+                className="flex items-center justify-center gap-2 border px-4 py-2 rounded-lg"
+              >
                 <FaFacebookF size={25} />
               </button>
             </div>
