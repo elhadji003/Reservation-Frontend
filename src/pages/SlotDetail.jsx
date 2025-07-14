@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  useGetSlotByIdQuery,
-  useCreateReservationMutation,
-} from "../features/reservation/reservationAPI";
+
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { FaMapMarkedAlt, FaRegCalendarAlt } from "react-icons/fa";
 import { useGetMeQuery } from "../features/auth/authAPI";
 import toast from "react-hot-toast";
+import { useGetSlotByIdQuery } from "../features/slot/slotAPI";
+import { useCreateReservationMutation } from "../features/reservation/reservationAPI";
 
 const SlotDetail = () => {
   const { id } = useParams();

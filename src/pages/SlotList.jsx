@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import { useGetSlotsQuery } from "../features/reservation/reservationAPI";
+import { useGetSlotsQuery } from "../features/slot/slotAPI";
 import { Link } from "react-router-dom";
 
 const SlotList = () => {

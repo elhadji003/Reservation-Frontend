@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  useCreateSlotMutation,
   useGetResourcesQuery,
   useGetFacilitiesQuery,
+  useGetSlotByIdQuery,
+  useUpdateSlotMutation,
 } from "../../features/slot/slotAPI";
 import toast from "react-hot-toast";
+import { useParams, useNavigate } from "react-router-dom";
 
-const CreerSlots = () => {
+const UpdateSlot = () => {
+  const { slotId } = useParams();
+  const navigate = useNavigate();
+
+  const { data: slotData, isLoading: loadingSlot } =
+    useGetSlotByIdQuery(slotId);
+  const [updateSlot, { isLoading }] = useUpdateSlotMutation();
+  const { data: ressources } = useGetResourcesQuery();
+  const { data: facilities } = useGetFacilitiesQuery();
+
   const [form, setForm] = useState({
     title: "",
     is_booked: false,
@@ -31,9 +42,22 @@ const CreerSlots = () => {
     image3: "",
   });
 
-  const [createSlot, { isLoading }] = useCreateSlotMutation();
-  const { data: ressources } = useGetResourcesQuery();
-  const { data: facilities } = useGetFacilitiesQuery();
+  // Préremplissage du formulaire à partir des données existantes
+  useEffect(() => {
+    if (slotData) {
+      setForm({
+        title: slotData.title || "",
+        is_booked: slotData.is_booked || false,
+        category: slotData.category || "",
+        rating: slotData.rating || 0,
+        start_time: slotData.start_time || "",
+        end_time: slotData.end_time || "",
+        map: slotData.map || "",
+        resource: slotData.resource || "",
+        facilities: slotData.facilities || [],
+      });
+    }
+  }, [slotData]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -60,7 +84,6 @@ const CreerSlots = () => {
     const file = files[0];
 
     if (file) {
-      // Vérification de l'extension
       const validExtensions = ["jpg", "jpeg", "png", "gif", "webp"];
       const ext = file.name.split(".").pop().toLowerCase();
 
@@ -94,31 +117,25 @@ const CreerSlots = () => {
     });
 
     try {
-      await createSlot(formData).unwrap();
-      toast.success("Créneau créé avec succès !");
-      setForm({
-        title: "",
-        is_booked: false,
-        category: "",
-        rating: 0,
-        start_time: "",
-        end_time: "",
-        map: "",
-        resource: "",
-        facilities: [],
-      });
-      setImages({ image1: null, image2: null, image3: null });
-      setPreviews({ image1: "", image2: "", image3: "" });
+      await updateSlot({ id: slotId, formData }).unwrap();
+      toast.success("Créneau mis à jour avec succès !");
+      navigate("/mes-slots"); // Redirection après mise à jour (modifie le chemin si nécessaire)
     } catch (err) {
       console.error(err);
-      toast.error("Erreur lors de la création du créneau.");
+      toast.error("Erreur lors de la mise à jour du créneau.");
     }
   };
+
+  if (loadingSlot) {
+    return (
+      <p className="text-center text-gray-500">Chargement des données...</p>
+    );
+  }
 
   return (
     <div className="p-6 max-w-5xl mx-auto bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold mb-8 text-center text-amber-700">
-        ➕ Nouveau créneau
+        ✏️ Modifier le créneau
       </h1>
 
       <form
@@ -264,11 +281,11 @@ const CreerSlots = () => {
           disabled={isLoading}
           className="md:col-span-2 mt-4 bg-amber-700 hover:bg-amber-800 transition text-white font-bold py-2 px-6 rounded shadow-md"
         >
-          {isLoading ? "Création en cours..." : "Créer le créneau"}
+          {isLoading ? "Mise à jour en cours..." : "Mettre à jour le créneau"}
         </button>
       </form>
     </div>
   );
 };
 
-export default CreerSlots;
+export default UpdateSlot;

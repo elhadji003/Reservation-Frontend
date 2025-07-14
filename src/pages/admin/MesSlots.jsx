@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   useGetSlotsQuery,
   useDeleteSlotMutation,
-} from "../../features/reservation/reservationAPI";
+} from "../../features/slot/slotAPI";
 import toast from "react-hot-toast";
 
 const MesSlots = () => {
@@ -138,7 +138,7 @@ const MesSlots = () => {
                 <div className="mt-4 flex justify-between gap-2">
                   <button
                     className="flex-1 border border-blue-600 text-blue-700 py-2 rounded hover:bg-blue-700 hover:text-white transition"
-                    onClick={() => navigate(`/admin/slots/edit/${slot.id}`)}
+                    onClick={() => navigate(`/slots/edit/${slot.id}`)}
                   >
                     Modifier
                   </button>
