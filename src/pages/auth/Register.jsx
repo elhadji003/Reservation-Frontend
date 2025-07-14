@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
 import { useRegisterMutation } from "../../features/auth/authAPI";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -16,7 +17,7 @@ const Register = () => {
     e.preventDefault();
 
     if (password !== password2) {
-      alert("Les mots de passe ne correspondent pas !");
+      toast.error("Les mots de passe ne correspondent pas !");
       return;
     }
 
@@ -27,11 +28,11 @@ const Register = () => {
         password,
         password2,
       }).unwrap();
-      alert("Inscription réussie !");
+      toast.success("Inscription réussie !");
       navigate("/dashboardClient");
     } catch (error) {
       console.log("Une erreur s'est produite :", error);
-      alert("Erreur lors de l'inscription");
+      toast.error("Erreur lors de l'inscription :", error);
     }
   };
 
@@ -88,7 +89,6 @@ const Register = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               id="password"
-              placeholder="••••••••"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"
             />
           </div>
@@ -105,7 +105,6 @@ const Register = () => {
               value={password2}
               onChange={(e) => setPassword2(e.target.value)}
               id="confirm_password"
-              placeholder="••••••••"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"
             />
           </div>

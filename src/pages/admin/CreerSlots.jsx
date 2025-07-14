@@ -5,6 +5,7 @@ import {
   useGetFacilitiesQuery,
 } from "../../features/slot/slotAPI";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CreerSlots = () => {
   const [form, setForm] = useState({
@@ -34,6 +35,7 @@ const CreerSlots = () => {
   const [createSlot, { isLoading }] = useCreateSlotMutation();
   const { data: ressources } = useGetResourcesQuery();
   const { data: facilities } = useGetFacilitiesQuery();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -109,6 +111,7 @@ const CreerSlots = () => {
       });
       setImages({ image1: null, image2: null, image3: null });
       setPreviews({ image1: "", image2: "", image3: "" });
+      navigate("/mes-slots");
     } catch (err) {
       console.error(err);
       toast.error("Erreur lors de la création du créneau.");

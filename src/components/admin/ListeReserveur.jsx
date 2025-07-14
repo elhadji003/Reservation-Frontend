@@ -26,14 +26,14 @@ const formatDateTime = (isoString) => {
 const ListeReserveur = () => {
   const { data: reservations, isLoading, error } = useGetAllReservationsQuery();
 
-  if (isLoading) return <p className="text-center py-10">Chargement...</p>;
+  if (isLoading) return <p className="text-center">Chargement...</p>;
   if (error)
     return (
       <p className="text-center text-red-500 py-10">Erreur de chargement</p>
     );
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50">
       <div className="flex items-center mb-6 justify-between  max-sm:gap-4">
         <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-3 max-sm:text-sm">
           <FaListAlt />

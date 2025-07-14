@@ -8,7 +8,7 @@ const DashboardAdmin = () => {
 
   return (
     <div>
-      <header className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 p-6 bg-white shadow-lg rounded-xl">
+      <header className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 p-6 bg-white shadow-lg rounded-xl max-sm:flex-col-reverse">
         <div>
           <h1 className="text-3xl md:text-4xl font-semibold text-gray-800">
             Bienvenue, <span className="text-amber-600">{user?.username}</span>{" "}

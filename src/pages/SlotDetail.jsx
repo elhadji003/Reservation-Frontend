@@ -67,7 +67,7 @@ const SlotDetail = () => {
                     alt={`image${i + 1}`}
                     onClick={() => setPreviewImage(src)}
                     className={`cursor-pointer transition-transform duration-200 hover:scale-105 w-full h-64 object-cover rounded-md ${
-                      i === 2 ? "col-span-2" : ""
+                      i === 2 ? "col-span-2 max-sm:col-span-1" : ""
                     }`}
                   />
                 )

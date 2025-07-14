@@ -5,6 +5,7 @@ import {
   useDeleteReservationMutation,
 } from "../features/reservation/reservationAPI";
 import toast from "react-hot-toast";
+import { FaCalendarTimes } from "react-icons/fa";
 
 const MyReservations = () => {
   const {
@@ -49,7 +50,15 @@ const MyReservations = () => {
   };
 
   if (isLoading) return <p>Chargement...</p>;
-  if (reservations.length === 0) return <p>Pas encore de réservations.</p>;
+  if (reservations.length === 0)
+    return (
+      <div className="flex flex-col items-center justify-center p-6 bg-gray-100 rounded-lg shadow-sm">
+        <FaCalendarTimes className="text-4xl text-gray-400 mb-2" />
+        <p className="text-gray-600 text-lg font-medium">
+          Aucune réservation pour le moment.
+        </p>
+      </div>
+    );
 
   return (
     <>
