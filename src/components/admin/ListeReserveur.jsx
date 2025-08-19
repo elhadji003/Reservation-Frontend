@@ -26,6 +26,17 @@ const formatDateTime = (isoString) => {
 const ListeReserveur = () => {
   const { data: reservations, isLoading, error } = useGetAllReservationsQuery();
 
+
+  const isToday = React.useCallback((dateString) => {
+    const today = new Date();
+    const date = new Date(dateString);
+    return (
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear()
+    );
+  }, []);
+
   if (isLoading) return <p className="text-center">Chargement...</p>;
   if (error)
     return (
@@ -61,9 +72,19 @@ const ListeReserveur = () => {
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <FaUser className="text-blue-600" />
                   <div>
-                    <p className="text-lg font-semibold text-gray-800">
-                      {res.user?.full_name || res.user?.username}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className="text-lg font-semibold text-gray-800">
+                        {res.user?.full_name || res.user?.username}
+                      </p>
+                      {isToday(res.created_at) && (
+                        <span
+                          className="text-xs text-white bg-green-500 rounded px-2 py-0.5 animate-pulse"
+                          aria-label="Nouvelle annonce"
+                        >
+                          Nouveau
+                        </span>
+                      )}
+                    </div>
                     {res.status === "cancelled" && (
                       <p className="text-sm text-red-500 italic">
                         a annulé sa réservation

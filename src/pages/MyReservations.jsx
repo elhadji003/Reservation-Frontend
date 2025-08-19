@@ -11,10 +11,8 @@ const MyReservations = () => {
   const {
     data: reservations = [],
     isLoading,
-    refetch,
-  } = useGetMyReservationsQuery(undefined, {
-    pollingInterval: 5000,
-  });
+    d,
+  } = useGetMyReservationsQuery();
   const [cancelReservation, { isLoading: isCancelling }] =
     useCancelReservationMutation();
   const [deleteReservation, { isLoading: isDeleting }] =

@@ -16,6 +16,7 @@ const Navbar = () => {
 
   const isAdmin = user?.role === "admin";
   const isUser = user?.role === "user";
+  const isHotelier = user?.role === "hotelier";
 
   return (
     <>
@@ -34,6 +35,15 @@ const Navbar = () => {
               <>
                 <li className="hover:scale-110 transition-all duration-200 ease-in-out">
                   <Link to="/dashboardAdmin">Dashboard</Link>
+                </li>
+              </>
+            )}
+
+            {/* Liens visibles uniquement pour l'hôtellier */}
+            {isHotelier && (
+              <>
+                <li className="hover:scale-110 transition-all duration-200 ease-in-out">
+                  <Link to="/dashboardHotelier">Dashboard</Link>
                 </li>
                 <li className="hover:scale-110 transition-all duration-200 ease-in-out">
                   <Link to="/mes-slots">Mes Slots</Link>

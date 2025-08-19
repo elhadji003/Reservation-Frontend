@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useForgotPasswordMutation } from "../../features/auth/authAPI";
 
 const ForgotPwd = () => {
-  const [forgotPassword] = useForgotPasswordMutation();
+  const [forgotPassword, {isLoading}] = useForgotPasswordMutation();
 
   const {
     register,
@@ -58,9 +58,11 @@ const ForgotPwd = () => {
 
           <button
             type="submit"
+            disabled={isLoading}
+            aria-label="Envoyer l'email de réinitialisation"
             className="w-full bg-amber-900 text-white py-3 rounded-lg hover:bg-amber-800 transition"
           >
-            Envoyer le lien de réinitialisation
+            {isLoading ? "Envoi en cours..." : "Envoyer l'email de réinitialisation"}
           </button>
         </form>
       </div>

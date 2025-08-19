@@ -8,6 +8,9 @@ import toast from "react-hot-toast";
 const UpdateProfile = ({ onclose }) => {
   const { data: user, refetch } = useGetMeQuery();
 
+  console.log("user", user);
+  
+
   const [editMode, setEditMode] = useState(false);
 
   const [username, setUsername] = useState(user?.username || "");

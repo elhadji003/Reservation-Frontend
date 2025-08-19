@@ -5,9 +5,6 @@ import UpdateSlot from "../pages/admin/UpdateSlot";
 
 const adminRoutes = [
   { path: "/dashboardAdmin", element: <DashboardAdmin /> },
-  { path: "/create-slot", element: <CreerSlots /> },
-  { path: "/mes-slots", element: <MesSlots /> },
-  { path: "/slots/edit/:slotId", element: <UpdateSlot /> },
 ];
 
 export default adminRoutes;

@@ -1,5 +1,4 @@
 import React from "react";
-import ListeReserveur from "../../components/admin/ListeReserveur";
 import { useGetMeQuery } from "../../features/auth/authAPI";
 import DashboardStats from "../../components/admin/DashboardStats";
 
@@ -37,8 +36,6 @@ const DashboardAdmin = () => {
       </header>
 
       <DashboardStats />
-
-      <ListeReserveur />
     </div>
   );
 };

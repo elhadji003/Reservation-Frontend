@@ -12,12 +12,27 @@ export const authApi = createApi({
         body: data,
       }),
     }),
+    registerHotelier: builder.mutation({
+      query: (data) => ({
+        url: "register/hotelier/",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"]
+    }),
     login: builder.mutation({
       query: (credentials) => ({
         url: "login/",
         method: "POST",
         body: credentials,
       }),
+    }),
+    listeUsers: builder.query({
+      query: () => ({
+        url: "users/",
+        method: "GET",
+      }),
+      invalidatesTags: ["Users"]
     }),
     refreshToken: builder.mutation({
       query: (refreshToken) => ({
@@ -38,6 +53,13 @@ export const authApi = createApi({
         method: "DELETE",
       }),
     }),
+    adminDeleteAccount: builder.mutation({
+      query: (userId) => ({
+        url: `admin/delete-account/${userId}/`,
+        method: "DELETE",
+    }),
+    invalidatesTags: ["Users"]
+    }),
     getMe: builder.query({
       query: () => ({
         url: "profile/",
@@ -50,6 +72,7 @@ export const authApi = createApi({
         method: "PUT",
         body: formData,
       }),
+      invalidatesTags: ["Users"]
     }),
     changePassword: builder.mutation({
       query: (passwords) => ({
@@ -78,7 +101,9 @@ export const authApi = createApi({
 
 export const {
   useRegisterMutation,
+  useRegisterHotelierMutation,
   useLoginMutation,
+  useListeUsersQuery,
   useRefreshTokenMutation,
   useChangePasswordMutation,
   useLogoutMutation,
@@ -86,4 +111,6 @@ export const {
   useUpdateProfileUserMutation,
   useResetPasswordMutation,
   useForgotPasswordMutation,
+  useDeleteAccountMutation,
+  useAdminDeleteAccountMutation,
 } = authApi;

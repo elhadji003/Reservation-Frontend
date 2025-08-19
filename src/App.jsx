@@ -7,6 +7,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import { publicRoutes } from "./routes/publicRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import { userRoutes } from "./routes/userRoutes";
+import { hotelierRoutes } from "./routes/hotelierRoutes";
 
 const App = () => {
   return (
@@ -39,6 +40,17 @@ const App = () => {
           }
         >
           {adminRoutes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
+        </Route>
+        <Route
+          element={
+            <ProtectedRoute allowedRoles={["hotelier"]}>
+              <LayoutAdmin />
+            </ProtectedRoute>
+          }
+        >
+          {hotelierRoutes.map(({ path, element }) => (
             <Route key={path} path={path} element={element} />
           ))}
         </Route>
