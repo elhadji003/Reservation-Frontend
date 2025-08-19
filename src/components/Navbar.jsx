@@ -99,7 +99,14 @@ const Navbar = () => {
                 <li className="hover:scale-110 transition-all duration-200 ease-in-out">
                   <Link to="/dashboardAdmin">Dashboard</Link>
                 </li>
+              </>
+            )}
 
+              {isHotelier && (
+              <>
+                <li className="hover:scale-110 transition-all duration-200 ease-in-out">
+                  <Link to="/dashboardHotelier">Dashboard</Link>
+                </li>
                 <li className="hover:scale-110 transition-all duration-200 ease-in-out">
                   <Link to="/mes-slots">Mes Slots</Link>
                 </li>
