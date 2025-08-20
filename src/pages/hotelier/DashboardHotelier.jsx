@@ -41,7 +41,7 @@ export default function DashboardHotelier() {
         </div>
 
         {/* Statistiques */}
-        <div className="grid grid-cols-2 sm:grid-cols-1 gap-4 w-full md:w-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 w-full md:w-auto">
           <StatCard
             title="Réservations Confirmées"
             value={confirmed}
